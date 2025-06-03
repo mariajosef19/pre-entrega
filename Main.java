@@ -30,7 +30,7 @@ public class Main {
                     listarArticulos();
                     break;
                 case 3:
-                    modificarArticulo();
+                    modificarArticulo(); 
                     break;
                 case 4:
                     eliminarArticulo();
@@ -50,24 +50,29 @@ public class Main {
         System.out.print("ID: ");
         int id = teclado.nextInt();
         teclado.nextLine();
-
+//validación de ID y nombre
         for (Articulo articulo : lista) {
             if (articulo.getId() == id) {
                 System.out.println("Ya existe un artículo con ese ID.");
                 return;
             }
         }
-
         System.out.print("Nombre: ");
         String nombre = teclado.nextLine();
-
+        for (Articulo articulo : lista) {
+            if (articulo.getNombre().equalsIgnoreCase(nombre)) {
+                System.out.println("Ya existe un artículo con ese nombre.");
+                return;
+            }
+        }
+//validación de precio
         System.out.print("Precio: ");
         double precio = teclado.nextDouble();
         if (precio < 0) {
             System.out.println(" El precio no puede ser negativo.");
             return;
         }
-
+// Creación del nuevo artículo que se agrega a la lista
         Articulo nuevo = new Articulo(id, nombre, precio);
         lista.add(nuevo);
         System.out.println("Artículo agregado correctamente.");
@@ -92,10 +97,11 @@ public class Main {
         for (Articulo articulo : lista) {
             if (articulo.getId() == id) {
                 System.out.print("Nuevo nombre: ");
-                String nuevoNombre = teclado.nextLine();
+                 String nuevoNombre = teclado.nextLine();
                 articulo.setNombre(nuevoNombre);
-
-                System.out.print("Nuevo precio: ");
+                
+      
+      System.out.print("Nuevo precio: ");
                 double nuevoPrecio = teclado.nextDouble();
                 if (nuevoPrecio < 0) {
                     System.out.println(" El precio no puede ser negativo.");
@@ -104,9 +110,9 @@ public class Main {
                 articulo.setPrecio(nuevoPrecio);
                 System.out.println(" Artículo modificado correctamente.");
                 return;
-            }
+            
         }
-        System.out.println(" Artículo no encontrado.");
+        System.out.println(" Artículo no encontrado.");}
     }
 
     public static void eliminarArticulo() {
